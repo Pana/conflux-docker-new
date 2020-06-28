@@ -42,7 +42,7 @@ async function transferCfx() {
 
 async function waitns(number = 30) {
     await new Promise(function(resolve, reject) {
-        setTimeout(resolve(), number * 1000);
+        setTimeout(resolve, number * 1000);
     });
 }
 
