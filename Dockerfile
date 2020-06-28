@@ -20,15 +20,12 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
     apt-get install -y nodejs
 
 WORKDIR /root
-RUN mkdir run && cd run
-COPY --from=builder /usr/src/conflux/run .
 COPY --from=builder /usr/local/cargo/bin/conflux /usr/local/bin/conflux
-
-RUN conflux account list
-COPY new_account.sh .
-RUN chmod a+x new_account.sh
-RUN ./new_account.sh
-RUN conflux account list
+COPY run .
+COPY scripts .
 
 EXPOSE 12535 12536 12537 12538 12539 32323 32525
-CMD ["conflux", "--config", "default.toml"]
+# CMD ["conflux", "--config", "default.toml"]
+COPY start.sh .
+RUN ls
+ENTRYPOINT [ "./start.sh" ]
