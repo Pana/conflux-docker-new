@@ -15,17 +15,16 @@ RUN cargo install --path .
 
 FROM debian:buster-slim
 # RUN apt-get update && apt-get install -y extra-runtime-dependencies
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update && apt-get install -y curl build-essential
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
     apt-get install -y nodejs
 
 WORKDIR /root
 COPY --from=builder /usr/local/cargo/bin/conflux /usr/local/bin/conflux
-COPY run .
-COPY scripts .
+COPY . .
+RUN cd scripts && npm i
 
 EXPOSE 12535 12536 12537 12538 12539 32323 32525
 # CMD ["conflux", "--config", "default.toml"]
-COPY start.sh .
-RUN ls
+RUN chmod +x start.sh
 ENTRYPOINT [ "./start.sh" ]
