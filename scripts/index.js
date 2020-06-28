@@ -40,13 +40,24 @@ async function transferCfx() {
     }
 }
 
+async function waitns(number = 30) {
+    await new Promise(function(resolve, reject) {
+        setTimeout(resolve(), number * 1000);
+    });
+}
+
 ;(async () => {
+    // wait 30s
+    await waitns();
+    // check accounts
+    let accounts = await getAccounts();
+    if (accounts.length >= 10) {
+        return;
+    }
     // gen 10 accounts
     await genAccounts(); 
     // wait 30s
-    await new Promise(function(resolve, reject) {
-        setTimeout(resolve(), 30*1000);
-    });
+    await waitns();
     // transfer cfx to genesis account
     await transferCfx();
 })();
