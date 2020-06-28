@@ -1,9 +1,9 @@
 #!/bin/bash
 
-cd ./scripts
-nohup node index.js &
+set -m
 
-cd ..
-cd ./run
-conflux --config ./default.toml
-# node scripts/index.js
+./conflux.sh & 
+
+./gene_account.sh
+
+fg %1
