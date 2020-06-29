@@ -1,4 +1,6 @@
 const {Conflux, provider, util} = require('js-conflux-sdk');
+const TOML = require('@iarna/toml');
+const fs = require('fs');
 
 const URL = "http://localhost:12537";
 const client = provider(URL);
@@ -11,6 +13,12 @@ const cfx = new Conflux({
 });
 const account = cfx.Account(PRI_KEY);
 console.log("Gene account: ", account.address);
+
+function readConfig() {
+    let configString = fs.readFileSync("../run/default.toml", "utf-8");
+    let config = TOML.parse(configString);
+    return config;
+}
 
 async function genAccounts() {
     for(let i = 1; i <= 10; i++) {
@@ -33,7 +41,7 @@ async function transferCfx() {
                 to: target,
                 value: util.unit.fromCFXToDrip(1000), // use unit to transfer from CFX to Drip
             }).executed();
-            console.log(`Transferint to ${target} hash ${tx.transactionHash}`);
+            console.log(`Transfering to ${target} hash ${tx.transactionHash}`);
         } catch(e) {
             console.error(e);
         }
@@ -47,6 +55,11 @@ async function waitns(number = 30) {
 }
 
 ;(async () => {
+    // check mining address
+    const config = readConfig();
+    if("0x" + config.mining_author !== account.address) {
+        return;
+    }
     // wait 30s
     await waitns();
     // check accounts

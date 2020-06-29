@@ -21,4 +21,5 @@ So i need a script to:
 ### TO OP
 
 1. install cmake with apt-get
+2. generate miner account random
 

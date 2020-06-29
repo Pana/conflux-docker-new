@@ -28,7 +28,7 @@ $ docker run -p 12537:12537 --name cfx-node pana/conflux-rust
 You can attach a folder on local machine to container, in which folder should include conflux config file, or even genesis_secret, genesis_account file。When conflux client run up, chain data will also save to this folder。
 
 ```sh
-$ docker run -v ./local/run:/root/run --name cfx-node pana/conflux-rust
+$ docker run -p 12537:12537 -v $(pwd)/run:/root/run --name cfx-node pana/conflux-rust
 ```
 
 

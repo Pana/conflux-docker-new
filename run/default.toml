@@ -92,7 +92,7 @@ log_conf="log.yaml"
 # If not set, the process will try to find out the public IP with best effort, and use `port` as public port.
 # However, it's HIGHLY RECOMMENDED to set the value manually, especially for machines with IP translated by NAT.
 #
-public_address="124.193.101.50:32323"
+# public_address="124.193.101.50:32323"
 
 # `port` is the TCP port that the process listens for P2P messages.
 #
@@ -112,7 +112,7 @@ public_address="124.193.101.50:32323"
 # If not set, domain validation is disabled.
 # By default, the values are not set. 
 #
-# jsonrpc_cors="all"
+jsonrpc_cors="all"
 
 # The following parameters are the ports for the node to provide rpc service. If not set,
 # the node will not start rpc services. By default, the `jsonrpc_local_http_port` is set,
