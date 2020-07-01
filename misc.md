@@ -22,4 +22,5 @@ So i need a script to:
 
 1. install cmake with apt-get
 2. generate miner account random
+3. OP genesis account generate way
 

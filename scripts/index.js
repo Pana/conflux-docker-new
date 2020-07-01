@@ -61,7 +61,7 @@ async function waitns(number = 30) {
         return;
     }
     // wait 30s
-    await waitns();
+    await waitns(5);
     // check accounts
     let accounts = await getAccounts();
     if (accounts.length >= 10) {
@@ -70,7 +70,7 @@ async function waitns(number = 30) {
     // gen 10 accounts
     await genAccounts(); 
     // wait 30s
-    await waitns();
+    await waitns(10);
     // transfer cfx to genesis account
     await transferCfx();
 })();
